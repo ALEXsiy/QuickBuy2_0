@@ -20,7 +20,7 @@ public class Product {
     private @NotNull String description;
 
 
-    // Many to one relationship
+    // ManyToOne relationship
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "category_id")
