@@ -1,6 +1,7 @@
 package com.baturin.QuickBuy.service;
 
 import com.baturin.QuickBuy.dto.ProductDto;
+import com.baturin.QuickBuy.exception.ProductNotExistsException;
 import com.baturin.QuickBuy.model.Category;
 import com.baturin.QuickBuy.model.Product;
 import com.baturin.QuickBuy.repository.ProductRepo;
@@ -60,5 +61,13 @@ public class ProductService {
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         productRepo.save(product);
+    }
+
+    public Product findById(Integer productId) throws ProductNotExistsException {
+        Optional<Product> optionalProduct = productRepo.findById(productId);
+        if (optionalProduct.isEmpty()) {
+            throw new ProductNotExistsException("product id is invalid: " + productId);
+        }
+        return optionalProduct.get();
     }
 }
