@@ -7,7 +7,6 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,10 +44,12 @@ public class OrderService {
     }
 
     private SessionCreateParams.LineItem createSessionLineItem(CheckoutItemDto checkoutItemDto) {
+
         return SessionCreateParams.LineItem.builder()
                 .setPriceData(createPriceData(checkoutItemDto))
                 .setQuantity(Long.parseLong(String.valueOf(checkoutItemDto.getQuantity())))
                 .build();
+
     }
 
     private SessionCreateParams.LineItem.PriceData createPriceData(CheckoutItemDto checkoutItemDto) {
